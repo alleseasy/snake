@@ -43,6 +43,12 @@ public class draw extends JLabel{
 		g.setColor(Color.orange);
 		p = Snake.ptc(Snake.snail.getX(), Snake.snail.getY());
 		g.fillRect(p.x, p.y, 30, 30);
+		p = Snake.ptc(Snake.snail2.getX(), Snake.snail2.getY());
+		g.fillRect(p.x, p.y, 30, 30);
+		p = Snake.ptc(Snake.snail3.getX(), Snake.snail3.getY());
+		g.fillRect(p.x, p.y, 30, 30);
+		
+		
 		
 		//Draw grid
 		g.setColor(Color.black);

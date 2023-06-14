@@ -21,6 +21,8 @@ public class Snake {
 	public static PickUp pickup = new PickUp();
 	
 	public static Snail snail = new Snail();
+	public static Snail snail2 = new Snail();
+	public static Snail snail3 = new Snail();
 	
 	public static Random random = new Random();
 
@@ -78,19 +80,27 @@ public class Snake {
 	
 	//move snail
 	public static void moveSnail() {
-		int r = random.nextInt(5);
+		int r = random.nextInt(4);
 		switch(r) {
 		case 0:
 			snail.setX(snail.getX()+1);
+			snail2.setX(snail2.getX()-1);
+			snail3.setY(snail3.getY()+1);
 			break;
 		case 1:
 			snail.setX(snail.getX()-1);
+			snail2.setX(snail2.getX()+1);
+			snail3.setY(snail3.getY()-1);
 			break;
 		case 2:
 			snail.setY(snail.getY()+1);
+			snail2.setY(snail2.getY()-1);
+			snail3.setX(snail3.getX()+1);
 			break;
 		case 3:
 			snail.setY(snail.getY()-1);
+			snail2.setY(snail2.getY()+1);
+			snail3.setX(snail3.getX()-1);
 			break;
 		}
 	}

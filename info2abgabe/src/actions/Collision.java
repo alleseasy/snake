@@ -44,16 +44,34 @@ public class Collision {
 			
 			//score
 			Snake.score +=1;
-			if(Snake.score > Snake.bestscore) {
-				Snake.bestscore = Snake.score;
-			}
 		}
+		if(Snake.head.getX() == Snake.snail2.getX() && Snake.head.getY() == Snake.snail2.getY()) {
+			Snake.snail2.reset();
+			Snake.addTail();
+			
+			//score
+			Snake.score +=1;
+		}
+		if(Snake.head.getX() == Snake.snail3.getX() && Snake.head.getY() == Snake.snail3.getY()) {
+			Snake.snail3.reset();
+			Snake.addTail();
+			
+			//score
+			Snake.score +=1;
+		}
+		
 			
 	}
 		
 		public static void collideSnailWall() {
 			if(Snake.snail.getX() < 0 || Snake.snail.getX() > 23 || Snake.snail.getY() < 0 || Snake.snail.getY() > 23){
 				Snake.snail.reset();
+				}
+			if(Snake.snail2.getX() < 0 || Snake.snail2.getX() > 23 || Snake.snail2.getY() < 0 || Snake.snail2.getY() > 23){
+				Snake.snail2.reset();
+				}
+			if(Snake.snail3.getX() < 0 || Snake.snail3.getX() > 23 || Snake.snail3.getY() < 0 || Snake.snail3.getY() > 23){
+				Snake.snail3.reset();
 				}
 				
 			

@@ -3,7 +3,6 @@ package game;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 import gui.Gui;
 
@@ -19,9 +18,13 @@ public class Snake {
 
 	public static PickUp pickup = new PickUp();
 
-	public static Snail snail = new Snail();
-	public static Snail snail2 = new Snail();
-	public static Snail snail3 = new Snail();
+	public static Snail[] snails = new Snail[3];
+
+	static {
+		for (int i = 0; i < snails.length; i++) {
+			snails[i] = new Snail();
+		}
+	}
 
 	public static Random random = new Random();
 
@@ -73,25 +76,44 @@ public class Snake {
 		}
 	}
 
-	// move snail
-	public static void moveSnail() {
+	// move snails
+	public static void moveSnails() {
+		for (Snail snail : snails) {
+			moveSingleSnail(snail);
+		}
+	}
 
-		// Set min and max to randomize within [-1,1]
-		int min = -1;
-		int max = 1;
+	// move single snail randomly
+	private static void moveSingleSnail(Snail snail) {
 
-		// Snail 1
-		snail.incrementX(random.nextInt(max - min) + min);
-		snail.incrementY(random.nextInt(max - min) + min);
+		// Decide on direction and increment
+		int dir = random.nextInt(2);
+		int increment = getIncrement(snail, dir);
 
-		// Snail 2
-		snail2.incrementX(random.nextInt(max - min) + min);
-		snail2.incrementY(random.nextInt(max - min) + min);
+		if (dir == 0) {
+			snail.incrementX(increment);
+		} else {
+			snail.incrementY(increment);
+		}
+	}
 
-		// Snail 2
-		snail3.incrementX(random.nextInt(max - min) + min);
-		snail3.incrementY(random.nextInt(max - min) + min);
+	private static int getIncrement(Snail snail, int dir) {
+		int increment = random.nextInt(3) - 1;
+		if (isWallColliding(snail, increment, dir)) {
+			increment = -1 * increment;
+		}
 
+		return increment;
+	}
+
+	private static boolean isWallColliding(Snail snail, int increment, int dir) {
+		if (dir == 0) {
+			return (snail.getX() + increment < 0
+					|| snail.getX() + increment > 23);
+		} else {
+			return (snail.getY() + increment < 0
+					|| snail.getY() + increment > 23);
+		}
 	}
 
 	// position to coordinates
